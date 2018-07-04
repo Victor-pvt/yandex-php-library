@@ -26,7 +26,7 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])
                 $market->setOrderStatus($_GET['orderId'], $_GET['status']);
             }
         }
-        /** @var Yandex\Market\Models\Order $orders */
+        /** @var Yandex\Market\Partner\Models\Order $orders */
         $order = $market->getOrder($_GET['orderId']);
     } catch (ForbiddenException $ex) {
         $errorMessage = $ex->getMessage();
@@ -170,7 +170,7 @@ if (!isset($_GET['campaignId']) || !$_GET['campaignId'] || !isset($_GET['orderId
         <h3>Товары:</h3>
         <?php
         if ($order->getItems() instanceof Traversable) {
-            /** @var Yandex\Market\Models\Item $item */
+            /** @var Yandex\Market\Partner\Models\Item $item */
             foreach ($order->getItems() as $item) {
                 ?>
                 <p>

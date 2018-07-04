@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $debug) {
 
     //Передача заказа и запрос на принятие заказа
     //Get
-    $postOrderAccept = new \Yandex\Market\Models\PostOrderAccept();
+    $postOrderAccept = new \Yandex\Market\Partner\Models\PostOrderAccept();
     $postOrderAccept->fromJson($json);
 
     //Ответ магазина на запрос от Яндекс.Маркета
-    $postOrderAcceptResponse = new \Yandex\Market\Models\PostOrderAcceptResponse();
+    $postOrderAcceptResponse = new \Yandex\Market\Partner\Models\PostOrderAcceptResponse();
     //Заказ
-    $acceptOrder = new \Yandex\Market\Models\AcceptOrder();
+    $acceptOrder = new \Yandex\Market\Partner\Models\AcceptOrder();
     //Идентификатор заказа, присвоенный магазином. Указывается, если заказ принят.
     $id = rand(1000, 10000);
     if ($id % 2 === 0) {

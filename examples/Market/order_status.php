@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $debug) {
 
     //Передача заказа и запрос на принятие заказа
     //Get
-    $postOrderStatus = new \Yandex\Market\Models\PostOrderStatus();
+    $postOrderStatus = new \Yandex\Market\Partner\Models\PostOrderStatus();
     $postOrderStatus->fromJson($json);
     $status = $postOrderStatus->getOrder()->getStatus();
     $subStatus = $postOrderStatus->getOrder()->getSubstatus();

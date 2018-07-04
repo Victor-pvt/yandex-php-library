@@ -67,8 +67,8 @@ if (isset($_REQUEST['type'])) {
             <li>
                 Указываем Callback URI. К примеру, для этого сайта он должен быть
                 таким: <a
-                    href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/examples/OAuth/callback.php">http://<?php echo $_SERVER['HTTP_HOST'] ?>
-                    /examples/OAuth/callback.php</a>
+                    href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/OAuth/callback.php">http://<?php echo $_SERVER['HTTP_HOST'] ?>
+                    /OAuth/callback.php</a>
             </li>
             <li>Нажимаем "Создать" (Подробней о регистрации приложения вы можете прочитать на
                 <a href="http://api.yandex.ru/oauth/doc/dg/tasks/register-client.xml">этой</a> странице).

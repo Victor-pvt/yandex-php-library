@@ -16,10 +16,18 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
     } catch (ForbiddenException $ex) {
         $errorMessage = $ex->getMessage();
         $errorMessage .= '<p>Возможно, у приложения нет прав на доступ к ресурсу. Попробуйте '
-            . '<a href="' . rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__), "/") . "/../OAuth/" . '">авторизироваться</a> и повторить.</p>';
+            . '<a href="' . rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__), "/") . "/../OAuth/index.php" . '">авторизироваться</a> и повторить.</p>';
 
     } catch (Exception $ex) {
         $errorMessage = $ex->getMessage();
+    }
+}else{
+    if(isset($settings['global']['accessToken']) and isset($settings['global']['clientId'])){
+        $yaAccessToken = $settings['global']['accessToken'];
+        $yaClientId = $settings['global']['clientId'];
+        setcookie("yaAccessToken", $yaAccessToken, null, '/');
+        setcookie("yaClientId", $yaClientId, null, '/');
+        header('Location: index.php');
     }
 }
 ?>
@@ -46,7 +54,7 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
         ?>
         <div class="alert alert-info">
             Для просмотра этой страници вам необходимо авторизироваться.
-            <a id="goToAuth" href="<?php echo rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__), "/") . '/../OAuth/'?>" class="alert-link">Перейти на страницу авторизации</a>.
+            <a id="goToAuth" href="<?php echo rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__), "/") . '/../OAuth/index.php'?>" class="alert-link">Перейти на страницу авторизации</a>.
         </div>
     <?php
     elseif ($errorMessage) :
@@ -68,7 +76,7 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
 
         <h3>Ответ:</h3>
             <?php
-            /** @var \Yandex\Market\Models\Campaign $campaign */
+            /** @var \Yandex\Market\Partner\Models\Campaign $campaign */
             if ($campaigns instanceof Traversable) {
 
                 $params = [
@@ -113,7 +121,7 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
                             <div class="panel-body">
                                 <?php
                                 if ($orders instanceof Traversable) {
-                                    /** @var Yandex\Market\Models\Order $order */
+                                    /** @var Yandex\Market\Partner\Models\Order $order */
                                     foreach ($orders as $order) {
                                         ?>
                                         <p>
