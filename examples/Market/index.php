@@ -1,5 +1,7 @@
 <?php
 $settings = require_once '../settings.php';
+require 'outlet.php';
+
 use Yandex\Market\Partner\PartnerClient;
 use Yandex\Common\Exception\ForbiddenException;
 
@@ -10,6 +12,13 @@ if (isset($_POST['outletId'])) {
 }else{
     $outletId = null;
 }
+
+if (isset($_POST['outletCreate'])) {
+    $outletCreate = 1;
+}else{
+    $outletCreate = null;
+}
+
 // Is auth
 if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
     $market = new PartnerClient($_COOKIE['yaAccessToken']);
@@ -103,7 +112,35 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
             }
             ?>
 
-            <h2>Точка доступа пользователя</h2>
+            <h2>Создание точки продажи</h2>
+            <h3>Запрос:</h3>
+            <p>
+                <a href="https://tech.yandex.ru/market/partner/doc/dg/reference/post-campaigns-id-outlets-docpage/">
+                    POST /campaigns/{campaignId}/outlets
+                </a>
+            </p>
+
+            <h3>Ответ: Создает точку продаж></h3>
+            <form method="post">
+                <input type="checkbox" name="outletCreate" value="" id="outlet">
+                <input type="submit" value="создать">
+            </form>
+            <?php
+            if($outletData){
+                $outlet = $market->setOutlet($outletData);
+                if($outletCreate){
+                    $response = $market->createCampaignOutlet($outlet);
+                    echo '<pre>';
+                    print_r($response);
+                    echo '</pre>';
+                }else{
+                    echo '<pre>';
+                    print_r($outlet);
+                    echo '</pre>';
+                }
+            }
+            ?>
+            <h2>Точка продажи</h2>
             <h3>Запрос:</h3>
             <p>
                 <a href="https://tech.yandex.ru/market/partner/doc/dg/reference/get-campaigns-id-outlets-id-docpage/">
@@ -134,7 +171,7 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
 
             }?>
 
-            <h2>Точки доступа пользователя</h2>
+            <h2>Точки продажи</h2>
             <h3>Запрос:</h3>
             <p>
                 <a href="https://tech.yandex.ru/market/partner/doc/dg/reference/get-campaigns-id-outlets-docpage/">
