@@ -13,9 +13,9 @@ class Outlet extends Model
         'address' => 'Yandex\Market\Partner\Models\AddressOutlet',
         'deliveryRules' => 'Yandex\Market\Partner\Models\DeliveryRules',
         'emails' => 'Yandex\Common\StringCollection',
-        'phones' => 'Yandex\Common\StringCollection'
+        'phones' => 'Yandex\Common\StringCollection',
+        'workingSchedule' => 'Yandex\Market\Partner\Models\WorkingSchedule'
     ];
-
     protected $propNameMap = [];
 
     /**
@@ -70,6 +70,11 @@ class Outlet extends Model
     protected $emails = null;
     protected $phones = null;
     protected $deliveryRules = null;
+    protected $workingSchedule = null;
+
+
+    protected $coords = null;
+    protected $shopOutletCode = null;
 
     /**
      * Retrieve the id property
@@ -195,5 +200,85 @@ class Outlet extends Model
     public function getPhones()
     {
         return $this->phones;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMappingClasses(): array
+    {
+        return $this->mappingClasses;
+    }
+
+    /**
+     * @param array $mappingClasses
+     */
+    public function setMappingClasses(array $mappingClasses)
+    {
+        $this->mappingClasses = $mappingClasses;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPropNameMap(): array
+    {
+        return $this->propNameMap;
+    }
+
+    /**
+     * @param array $propNameMap
+     */
+    public function setPropNameMap(array $propNameMap)
+    {
+        $this->propNameMap = $propNameMap;
+    }
+
+    /**
+     * @return null
+     */
+    public function getWorkingSchedule()
+    {
+        return $this->workingSchedule;
+    }
+
+    /**
+     * @param null $workingSchedule
+     */
+    public function setWorkingSchedule($workingSchedule)
+    {
+        $this->workingSchedule = $workingSchedule;
+    }
+
+    /**
+     * @return null
+     */
+    public function getCoords()
+    {
+        return $this->coords;
+    }
+
+    /**
+     * @param null $coords
+     */
+    public function setCoords($coords)
+    {
+        $this->coords = $coords;
+    }
+
+    /**
+     * @return null
+     */
+    public function getShopOutletCode()
+    {
+        return $this->shopOutletCode;
+    }
+
+    /**
+     * @param null $shopOutletCode
+     */
+    public function setShopOutletCode($shopOutletCode)
+    {
+        $this->shopOutletCode = $shopOutletCode;
     }
 }

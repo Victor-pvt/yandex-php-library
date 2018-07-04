@@ -23,6 +23,8 @@ class AddressOutlet extends Model
 
     protected $km = null;
 
+    protected $regionId = null;
+
     /**
      * @return null
      */
@@ -85,5 +87,21 @@ class AddressOutlet extends Model
     public function getKm()
     {
         return $this->km;
+    }
+
+    /**
+     * @return null
+     */
+    public function getRegionId()
+    {
+        return $this->regionId;
+    }
+
+    /**
+     * @param null $regionId
+     */
+    public function setRegionId($regionId)
+    {
+        $this->regionId = $regionId;
     }
 }

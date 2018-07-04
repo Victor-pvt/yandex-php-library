@@ -4,7 +4,7 @@ namespace Yandex\Market\Partner\Models;
 
 use Yandex\Common\ObjectModel;
 
-class DeliveryRules extends ObjectModel
+class ScheduleItems extends ObjectModel
 {
 
     protected $collection = [];
@@ -16,16 +16,17 @@ class DeliveryRules extends ObjectModel
     /**
      * Add item
      */
-    public function add($deliveryRule)
+    public function add($scheduleItem)
     {
-        if (is_array($deliveryRule)) {
-            $this->collection[] = new DeliveryRule($deliveryRule);
-        } elseif (is_object($deliveryRule) && $deliveryRule instanceof DeliveryRule) {
-            $this->collection[] = $deliveryRule;
+        if (is_array($scheduleItem)) {
+            $this->collection[] = new ScheduleItem($scheduleItem);
+        } elseif (is_object($scheduleItem) && $scheduleItem instanceof ScheduleItem) {
+            $this->collection[] = $scheduleItem;
         }
 
         return $this;
     }
+
     /**
      * Get items
      */

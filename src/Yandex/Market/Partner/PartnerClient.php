@@ -27,6 +27,7 @@ use Yandex\Market\Partner\Models\MarketModel;
 use Yandex\Market\Partner\Models\MarketModels;
 use Yandex\Market\Partner\Models\Order;
 use Yandex\Market\Partner\Models\Orders;
+use Yandex\Market\Partner\Models\Outlet;
 use Yandex\Market\Partner\Models\UpdateOrderDeliveryResponse;
 use Yandex\Market\Partner\Models\UpdateOrderStatusResponse;
 
@@ -41,6 +42,7 @@ use Yandex\Market\Partner\Models\UpdateOrderStatusResponse;
  */
 class PartnerClient extends AbstractServiceClient
 {
+    use TraitPartnerClient;
 
     /**
      * Order is being processed
@@ -144,6 +146,7 @@ class PartnerClient extends AbstractServiceClient
      */
     protected $serviceDomain = 'api.partner.market.yandex.ru';
 
+    protected $data;
     /**
      * Get url to service resource with parameters
      *
@@ -739,5 +742,67 @@ class PartnerClient extends AbstractServiceClient
         $marketModelsResponse = new GetMarketModelsResponse($decodedResponseBody);
 
         return $marketModelsResponse->getModels();
+    }
+    public function setOutlet($outletData)
+    {
+        $dataInput = json_decode($outletData, true);
+        $outlet = new Outlet($dataInput);
+
+        return $outlet;
+    }
+    // GET getCampaigns() /campaigns Возвращает список магазинов пользователя.
+
+    /**
+     * GET /campaigns/{campaignId}
+     * Возвращает информацию о магазине.
+     * @param $campaignId
+     */
+    public function getCampaign($campaignId)
+    {
+
+    }
+
+    // GET getLoginsByCampaign() GET /campaigns/{campaignId}/logins  Возвращает список логинов, связанных с магазином.
+
+    // GET getCampaignsByLogin($login) GET /campaigns/by_login/{login} Возвращает список магазинов, к которым имеет доступ логин.
+
+    // GET getOutlets($params = [])  GET /campaigns/{campaignId}/outlets Возвращает список точек продаж магазина.
+
+    // GET function getOutlet($outletId) GET /campaigns/{campaignId}/outlets/{outletId} Возвращает информацию о точке продаж.
+
+    /**
+     * POST /campaigns/{campaignId}/outlets
+     * Создает точку продаж.
+     * @param $dataInput
+     * https://api.partner.market.yandex.ru/v2/campaigns/{campaignId}/outlets.[format]
+     */
+    public function createCampaignOutlet(Outlet $outlet)
+    {
+        return $this->createCampaignOutletResponse($outlet);
+    }
+    public function createCampaignOutletResponse(Outlet $outlet)
+    {
+        $resource = 'campaigns/' . $this->campaignId . '/outlets.json';
+        $jOutlets = $outlet->toJson();
+        $response = $this->sendPost($this->getServiceUrl($resource),$jOutlets);
+
+        return $response;
+    }
+    /**
+     * PUT /campaigns/{campaignId}/outlets/{outletId}
+     * Изменяет информацию о точке продажи.
+     */
+    public function updateCampaignOutlet()
+    {
+
+    }
+
+    /**
+     * DELETE /campaigns/{campaignId}/outlets/{outletId}
+     *Удаляет точку продаж.
+     */
+    public function removeCampaignOutlet()
+    {
+
     }
 }

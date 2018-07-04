@@ -4,12 +4,18 @@ use Yandex\Market\Partner\PartnerClient;
 use Yandex\Common\Exception\ForbiddenException;
 
 $errorMessage = false;
-
+if (isset($_POST['outletId'])) {
+    $outletId = $_POST['outletId'];
+    unset($_POST['outletId']);
+}else{
+    $outletId = null;
+}
 // Is auth
 if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
     $market = new PartnerClient($_COOKIE['yaAccessToken']);
     $market->setClientId($_COOKIE['yaClientId']);
     $market->setLogin($settings['global']['marketLogin']);
+    $market->setCampaignId($settings['global']['campaignId']);
 
     try {
         $campaigns = $market->getCampaigns();
@@ -87,8 +93,6 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
                     'page' => 1
                 ];
 
-                $campaignId = $campaigns->current()->getId();
-                $market->setCampaignId($campaignId);
                 $orders = $market->getOrders($params);
 
                 foreach ($campaigns as $campaign) {
@@ -99,7 +103,58 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
             }
             ?>
 
-        <h2>Информация о запрашиваемых заказах</h2>
+            <h2>Точка доступа пользователя</h2>
+            <h3>Запрос:</h3>
+            <p>
+                <a href="https://tech.yandex.ru/market/partner/doc/dg/reference/get-campaigns-id-outlets-id-docpage/">
+                    GET /campaigns/{campaignId}/outlets/{outletId}
+                </a>
+            </p>
+
+            <h3>Ответ: Возвращает точку продаж></h3>
+            <form method="post">
+                <label for="outletId">outletId</label>
+                <input type="text" name="outletId" value="" id="outletId">
+                <input type="submit" value="получить">
+            </form>
+
+            <?php
+            if(isset($outletId)){
+
+            echo '<h4>точка продаж <'.$outletId.'></h4>';
+
+            $outlet = $market->getOutlet($outletId);
+
+
+
+                echo '<pre>';
+                print_r($outlet->toArray());
+                echo '</pre>';
+            }else{
+
+            }?>
+
+            <h2>Точки доступа пользователя</h2>
+            <h3>Запрос:</h3>
+            <p>
+                <a href="https://tech.yandex.ru/market/partner/doc/dg/reference/get-campaigns-id-outlets-docpage/">
+                    GET /campaigns/{campaignId}/outlets
+                </a>
+            </p>
+
+            <h3>Ответ: Возвращает список точек продаж магазина</h3>
+            <?php
+            $outlets = $market->getOutlets();
+            /** @var \Yandex\Market\Partner\Models\Outlet $outlet */
+            foreach ($outlets as $k=>$outlet){
+                if($k>2) continue;
+                echo '<pre>';
+                print_r($outlet->toArray());
+                echo '</pre>';
+            }
+            ?>
+
+            <h2>Информация о запрашиваемых заказах</h2>
         <h3>Запрос:</h3>
         <p>
             <a href="http://api.yandex.ru/market/partner/doc/dg/reference/get-campaigns-id-orders.xml">

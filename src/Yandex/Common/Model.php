@@ -146,7 +146,11 @@ abstract class Model
                     }
                 }
 
-                if (is_object($value) && method_exists($value, "getAll")) {
+                if (is_object($value) && method_exists($value, "getAll") && method_exists($value, "asArray")){
+                    if (method_exists($obj, 'toArrayRecursive')) {
+                        $result[$propNameMap] = $obj->toArrayRecursive($value->asArray());
+                    }
+                }elseif (is_object($value) && method_exists($value, "getAll")){
                     if (method_exists($obj, 'toArrayRecursive')) {
                         $result[$propNameMap] = $obj->toArrayRecursive($value->getAll());
                     }

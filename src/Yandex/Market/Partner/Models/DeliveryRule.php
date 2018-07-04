@@ -67,6 +67,20 @@ class DeliveryRule extends Model
     protected $propNameMap = [];
 
     /**
+     * @var integer|null
+     */
+    protected $deliveryServiceId = null;
+
+    /**
+     * @var string|null
+     */
+    protected $orderBefore = null;
+    /**
+     * @var float|null
+     */
+    protected $priceFreePickup = null;
+
+    /**
      * @return float|null
      */
     public function getCost()
