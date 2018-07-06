@@ -71,15 +71,6 @@ trait TraitPartnerClient
     protected function sendPost($url, $data)
     {
         return $this->sendCurlRequest('POST', $url, $data);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$addr);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeader());
-        $response = curl_exec ($ch);
-        curl_close ($ch);
-
     }
 
     /**
@@ -90,16 +81,6 @@ trait TraitPartnerClient
     protected function sendPut($url, $data)
     {
         return $this->sendCurlRequest('PUT', $url, $data);
-        $ch = curl_init($addr);
-        curl_setopt($ch, CURLOPT_PUT, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeader());
-        $response = curl_exec ($ch);
-        curl_close($ch);
-
-        return $response;
     }
 
     /**
@@ -110,13 +91,5 @@ trait TraitPartnerClient
     protected function sendDelete($url, $data=null)
     {
         return $this->sendCurlRequest('DELETE', $url, $data);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $addr);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getHeader());
-        $response = curl_exec ($ch);
-        curl_close($ch);
-
-        return $response;
     }
 }

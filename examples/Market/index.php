@@ -175,12 +175,12 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarket2">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarketUpdate">
                             <h2>Изменение информации о точке продажи</h2>
                         </a>
                     </h4>
                 </div>
-                <div id="apiMarket2" class="panel-collapse collapse<?php if (isset($outletCode)) echo ' in';?>">
+                <div id="apiMarketUpdate" class="panel-collapse collapse<?php if (isset($outletCode)) echo ' in';?>">
                     <div class="panel-body">
                         <h3>Запрос:</h3>
                         <p>
@@ -217,12 +217,12 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarket3">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarketCreate">
                             <h2>Создание точки продажи</h2>
                         </a>
                     </h4>
                 </div>
-                <div id="apiMarket3" class="panel-collapse collapse">
+                <div id="apiMarketCreate" class="panel-collapse collapse<?php if (isset($outletCreate) and $outletCreate) echo ' in';?>">
                     <div class="panel-body">
                         <h3>Запрос:</h3>
                         <p>
@@ -258,12 +258,12 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarket4">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarketOutlet">
                             <h2>Точка продажи</h2>
                         </a>
                     </h4>
                 </div>
-                <div id="apiMarket4" class="panel-collapse collapse<?php if (isset($outletId)) echo ' in';?>">
+                <div id="apiMarketOutlet" class="panel-collapse collapse<?php if (isset($outletId)) echo ' in';?>">
                     <div class="panel-body">
                         <h3>Запрос:</h3>
                         <p>
@@ -300,12 +300,12 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarket4">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarketOutlets">
                             <h2>Точки продажи</h2>
                         </a>
                     </h4>
                 </div>
-                <div id="apiMarket4" class="panel-collapse collapse">
+                <div id="apiMarketOutlets" class="panel-collapse collapse">
                     <div class="panel-body">
                         <h3>Запрос:</h3>
                         <p>
@@ -333,12 +333,12 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarket4">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarketOrders">
                             <h2>Информация о запрашиваемых заказах</h2>
                         </a>
                     </h4>
                 </div>
-                <div id="apiMarket4" class="panel-collapse collapse">
+                <div id="apiMarketOrders" class="panel-collapse collapse">
                     <div class="panel-body">
                         <h3>Запрос:</h3>
                         <p>

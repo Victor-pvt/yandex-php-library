@@ -147,6 +147,8 @@ class PartnerClient extends AbstractServiceClient
     protected $serviceDomain = 'api.partner.market.yandex.ru';
 
     protected $data;
+
+    protected $errors;
     /**
      * Get url to service resource with parameters
      *
@@ -755,6 +757,15 @@ class PartnerClient extends AbstractServiceClient
 
         return $outlet;
     }
+
+    /**
+     * @param Outlet $outlet
+     * @return bool
+     */
+    public function validateOutlet(Outlet $outlet)
+    {
+        return true;
+    }
     // GET getCampaigns() /campaigns Возвращает список магазинов пользователя.
 
     /**
@@ -783,7 +794,12 @@ class PartnerClient extends AbstractServiceClient
      */
     public function createCampaignOutlet(Outlet $outlet)
     {
-        return $this->createCampaignOutletResponse($outlet);
+        if($this->validateOutlet($outlet)){
+            return $this->createCampaignOutletResponse($outlet);
+        }else{
+
+            return 'Outlet no validate';
+        }
     }
     public function createCampaignOutletResponse(Outlet $outlet)
     {
