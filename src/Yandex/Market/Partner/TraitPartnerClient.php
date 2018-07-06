@@ -54,7 +54,6 @@ trait TraitPartnerClient
                 break;
             case "DELETE":
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                 break;
         }
         $respone = curl_exec($curl);

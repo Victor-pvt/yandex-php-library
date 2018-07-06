@@ -789,8 +789,9 @@ class PartnerClient extends AbstractServiceClient
     /**
      * POST /campaigns/{campaignId}/outlets
      * Создает точку продаж.
-     * @param $dataInput
      * https://api.partner.market.yandex.ru/v2/campaigns/{campaignId}/outlets.[format]
+     * @param Outlet $outlet
+     * @return mixed|string
      */
     public function createCampaignOutlet(Outlet $outlet)
     {
@@ -838,9 +839,9 @@ class PartnerClient extends AbstractServiceClient
      * DELETE /campaigns/{campaignId}/outlets/{outletId}
      *Удаляет точку продаж.
      */
-    public function removeCampaignOutlet($outlet, $outletId)
+    public function removeCampaignOutlet($outletId)
     {
-        return $this->removeCampaignOutletResponse($outlet, $outletId);
+        return $this->removeCampaignOutletResponse($outletId);
     }
 
     /**
@@ -850,11 +851,10 @@ class PartnerClient extends AbstractServiceClient
      * @param $outletId
      * @return mixed
      */
-    public function removeCampaignOutletResponse(Outlet $outlet, $outletId)
+    public function removeCampaignOutletResponse($outletId)
     {
         $resource = 'campaigns/' . $this->campaignId . '/outlets/' . $outletId . '.json';
-        $jOutlets = $outlet->toJson();
-        $response = $this->sendDelete($this->getServiceUrl($resource),$jOutlets);
+        $response = $this->sendDelete($this->getServiceUrl($resource));
 
         return $response;
     }

@@ -22,7 +22,7 @@ if (isset($_POST['outletRemove']) and isset($settings['global']['accessToken']) 
     header('Location: /Market/index.php');
 }
 
-$response = (isset($market) and isset($outletId)) ? $market->removeCampaignOutlet($outlet, $outletId) : null;
+$response = (isset($market) and isset($outletId)) ? $market->removeCampaignOutlet($outletId) : null;
 
 
 header('Location: /Market/index.php?remove_outlet=' . $response);
