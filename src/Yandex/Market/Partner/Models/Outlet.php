@@ -121,6 +121,11 @@ class Outlet extends Model
     {
         return $this->name;
     }
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
 
     /**
      * @return null|string
@@ -280,5 +285,113 @@ class Outlet extends Model
     public function setShopOutletCode($shopOutletCode)
     {
         $this->shopOutletCode = $shopOutletCode;
+    }
+
+    /**
+     * @param bool|null $isBookNow
+     */
+    public function setIsBookNow($isBookNow)
+    {
+        $this->isBookNow = $isBookNow;
+        return $this;
+    }
+
+    /**
+     * @param bool|null $isMain
+     */
+    public function setIsMain($isMain)
+    {
+        $this->isMain = $isMain;
+        return $this;
+    }
+
+    /**
+     * @param null|string $reason
+     */
+    public function setReason($reason)
+    {
+        $this->reason = $reason;
+        return $this;
+    }
+
+    /**
+     * @param null|string $shopOutletId
+     */
+    public function setShopOutletId($shopOutletId)
+    {
+        $this->shopOutletId = $shopOutletId;
+        return $this;
+    }
+
+    /**
+     * @param null|enum $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @param null|enum $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @param null|enum $visibility
+     */
+    public function setVisibility($visibility)
+    {
+        $this->visibility = $visibility;
+        return $this;
+    }
+
+    /**
+     * @param null|string $workingTime
+     */
+    public function setWorkingTime($workingTime)
+    {
+        $this->workingTime = $workingTime;
+        return $this;
+    }
+
+    /**
+     * @param null|AddressOutlet $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @param null $emails
+     */
+    public function setEmails($emails)
+    {
+        $this->emails = $emails;
+        return $this;
+    }
+
+    /**
+     * @param null $phones
+     */
+    public function setPhones($phones)
+    {
+        $this->phones = $phones;
+        return $this;
+    }
+
+    /**
+     * @param null $deliveryRules
+     */
+    public function setDeliveryRules($deliveryRules)
+    {
+        $this->deliveryRules = $deliveryRules;
+        return $this;
     }
 }

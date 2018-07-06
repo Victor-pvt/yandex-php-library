@@ -743,6 +743,11 @@ class PartnerClient extends AbstractServiceClient
 
         return $marketModelsResponse->getModels();
     }
+
+    /**
+     * @param $outletData
+     * @return Outlet
+     */
     public function setOutlet($outletData)
     {
         $dataInput = json_decode($outletData, true);
@@ -792,17 +797,49 @@ class PartnerClient extends AbstractServiceClient
      * PUT /campaigns/{campaignId}/outlets/{outletId}
      * Изменяет информацию о точке продажи.
      */
-    public function updateCampaignOutlet()
+    public function updateCampaignOutlet($outlet, $outletId)
     {
+        return $this->updateCampaignOutletResponse($outlet, $outletId);
+    }
 
+    /**
+     * PUT /campaigns/{campaignId}/outlets/{outletId}
+     * https://api.partner.market.yandex.ru/v2/campaigns/{campaignId}/outlets/{outletId}.[format]
+     * @param Outlet $outlet
+     * @param $outletId
+     * @return mixed
+     */
+    public function updateCampaignOutletResponse(Outlet $outlet, $outletId)
+    {
+        $resource = 'campaigns/' . $this->campaignId . '/outlets/' . $outletId . '.json';
+        $jOutlets = $outlet->toJson();
+        $response = $this->sendPut($this->getServiceUrl($resource),$jOutlets);
+
+        return $response;
     }
 
     /**
      * DELETE /campaigns/{campaignId}/outlets/{outletId}
      *Удаляет точку продаж.
      */
-    public function removeCampaignOutlet()
+    public function removeCampaignOutlet($outlet, $outletId)
     {
+        return $this->removeCampaignOutletResponse($outlet, $outletId);
+    }
 
+    /**
+     * DELETE /campaigns/{campaignId}/outlets/{outletId}
+     * https://api.partner.market.yandex.ru/v2/campaigns/{campaignId}/outlets/{outletId}.[format]
+     * @param Outlet $outlet
+     * @param $outletId
+     * @return mixed
+     */
+    public function removeCampaignOutletResponse(Outlet $outlet, $outletId)
+    {
+        $resource = 'campaigns/' . $this->campaignId . '/outlets/' . $outletId . '.json';
+        $jOutlets = $outlet->toJson();
+        $response = $this->sendDelete($this->getServiceUrl($resource),$jOutlets);
+
+        return $response;
     }
 }
