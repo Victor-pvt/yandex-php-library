@@ -31,6 +31,22 @@ if (isset($_GET['remove_outlet'])) {
 } else {
     $remove_outlet = null;
 }
+if (isset($_GET['regionName'])) {
+    $regionName = $_GET['regionName'];
+}else{
+    $regionName = null;
+}
+if (isset($_GET['regionId'])) {
+    $regionId = $_GET['regionId'];
+}else{
+    $regionId = null;
+}
+
+if (isset($_GET['regionChildren'])) {
+    $regionChildren = $_GET['regionChildren'];
+}else{
+    $regionChildren = null;
+}
 
 
 // Is auth
@@ -134,6 +150,82 @@ if (isset($_COOKIE['yaAccessToken']) && isset($_COOKIE['yaClientId'])) {
                             }
                         }
                         ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#apiMarketRegion">
+                            <h2>Поиск региона</h2>
+                        </a>
+                    </h4>
+                </div>
+                <div id="apiMarketRegion" class="panel-collapse collapse<?php if ($regionName || $regionChildren || $regionId) echo ' in';?>">
+                    <div class="panel-body">
+                        <h3>Запрос:</h3>
+                        <p>
+                            <a href="https://tech.yandex.ru/market/partner/doc/dg/reference/delete-campaigns-id-outlets-id-docpage/">
+                                GET /regions
+                                https://api.partner.market.yandex.ru/v2/regions.[format]?name={regionName}
+
+                            </a>
+                        </p>
+
+                        <h3>Ответ: Возвращает информацию о регионе, удовлетворяющем заданным в запросе условиям поиска></h3>
+                        <?php
+                        if($regionName){
+                            echo $regionName;
+                        }else {
+                            echo 'Список';
+                            echo '<form method="get">';
+                            echo 'введите название города';
+                            echo '<input type="text" name="regionName" value="" />';
+                            echo '<input type="submit" value="Найти">';
+                            echo '<br>';
+                            echo '</form>';
+
+                            echo 'Регион';
+                            echo '<form method="get">';
+                            echo 'введите код региона';
+                            echo '<input type="text" name="regionId" value="" />';
+                            echo '<input type="submit" value="Найти">';
+                            echo '<br>';
+                            echo '</form>';
+
+                            echo 'Дети';
+                            echo '<form method="get">';
+                            echo 'введите код региона';
+                            echo '<input type="text" name="regionChildren" value="" />';
+                            echo '<input type="submit" value="Найти">';
+                            echo '<br>';
+                            echo '</form>';
+                        }
+                        ?>
+                        <?php
+                        if (isset($regionName) and $regionName) {
+                            echo '<h4>Регион для <' . $regionName . '></h4>';
+                            $region = $market->getRegions($regionName);
+                            echo '<pre>';
+                            print_r($region);
+                            echo '</pre>';
+                        } elseif(isset($regionId) and $regionId) {
+                            echo '<h4>Регион для <' . $regionName . '></h4>';
+                            $region = $market->getRegions($regionName, $regionId);
+                            echo '<pre>';
+                            print_r($region);
+                            echo '</pre>';
+                        } elseif(isset($regionChildren) and $regionChildren) {
+                            echo '<h4>Регион для <' . $regionName . '></h4>';
+                            $region = $market->getRegions($regionName, $regionChildren, 'children');
+                            echo '<pre>';
+                            print_r($region);
+                            echo '</pre>';
+                        } else {
+
+
+                        } ?>
                     </div>
                 </div>
             </div>

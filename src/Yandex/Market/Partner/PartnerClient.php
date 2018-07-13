@@ -23,11 +23,13 @@ use Yandex\Market\Partner\Models\GetCampaignsResponse;
 use Yandex\Market\Partner\Models\GetMarketModelsResponse;
 use Yandex\Market\Partner\Models\GetOrderResponse;
 use Yandex\Market\Partner\Models\GetOrdersResponse;
+use Yandex\Market\Partner\Models\GetRegionResponse;
 use Yandex\Market\Partner\Models\MarketModel;
 use Yandex\Market\Partner\Models\MarketModels;
 use Yandex\Market\Partner\Models\Order;
 use Yandex\Market\Partner\Models\Orders;
 use Yandex\Market\Partner\Models\Outlet;
+use Yandex\Market\Partner\Models\Region;
 use Yandex\Market\Partner\Models\UpdateOrderDeliveryResponse;
 use Yandex\Market\Partner\Models\UpdateOrderStatusResponse;
 
@@ -857,5 +859,55 @@ class PartnerClient extends AbstractServiceClient
         $response = $this->sendDelete($this->getServiceUrl($resource));
 
         return $response;
+    }
+    /**
+     * Возвращает информацию о регионе, удовлетворяющем заданным в запросе условиям поиска
+     * Если найдено несколько регионов, удовлетворяющих условиям поиска, возвращается информация по каждому найденному
+     * региону (но не более десяти регионов) для возможности определения нужного региона по родительским регионам.
+     *
+     * @see https://tech.yandex.ru/market/partner/doc/dg/reference/get-regions-docpage/
+     * https://api.partner.market.yandex.ru/v2/regions.[format]?name={regionName}
+     *
+     * @param $name
+     * @param null $regionId
+     * @param null $children
+     * @return GetRegionResponse|mixed
+     */
+    public function getRegionsResponse($name, $regionId=null, $children=null)
+    {
+        $resource = 'regions.json';
+        if($regionId and $children){
+            $resource = 'regions/'.$regionId. '/children.json';
+
+        }elseif ($regionId){
+            $resource = 'regions/'.$regionId.'.json';
+
+        }else{
+            $resource .= '?' . http_build_query(['name' => $name]);
+        }
+        try{
+            $response = $this->sendRequest('GET', $this->getServiceUrl($resource));
+            $body = $response->getBody();
+            $decodedResponseBody = $this->getDecodedBody($body);
+
+            return $decodedResponseBody;
+        }catch (\Exception $exception){
+            $error = $exception->getMessage();
+
+            return $error;
+        }
+    }
+
+    /**
+     *
+     * Для методов GET /regions, GET /regions/{regionId} и GET /regions/{regionId}/children
+     * @param $name
+     * @param null $regionId
+     * @param null $children
+     * @return GetRegionResponse
+     */
+    public function getRegions($name, $regionId=null, $children=null)
+    {
+        return $this->getRegionsResponse($name, $regionId, $children);
     }
 }
