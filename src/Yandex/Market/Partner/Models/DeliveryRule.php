@@ -167,4 +167,132 @@ class DeliveryRule extends Model
     {
         return $this->workInHoliday;
     }
+
+    /**
+     * @param float|null $cost
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+    }
+
+    /**
+     * @param int|null $dateSwitchHour
+     */
+    public function setDateSwitchHour($dateSwitchHour)
+    {
+        $this->dateSwitchHour = $dateSwitchHour;
+    }
+
+    /**
+     * @param int|null $minDeliveryDays
+     */
+    public function setMinDeliveryDays($minDeliveryDays)
+    {
+        $this->minDeliveryDays = $minDeliveryDays;
+    }
+
+    /**
+     * @param int|null $maxDeliveryDays
+     */
+    public function setMaxDeliveryDays($maxDeliveryDays)
+    {
+        $this->maxDeliveryDays = $maxDeliveryDays;
+    }
+
+    /**
+     * @param float|null $priceFrom
+     */
+    public function setPriceFrom($priceFrom)
+    {
+        $this->priceFrom = $priceFrom;
+    }
+
+    /**
+     * @param float|null $priceTo
+     */
+    public function setPriceTo($priceTo)
+    {
+        $this->priceTo = $priceTo;
+    }
+
+    /**
+     * @param null|string $shipperHumanReadableId
+     */
+    public function setShipperHumanReadableId($shipperHumanReadableId)
+    {
+        $this->shipperHumanReadableId = $shipperHumanReadableId;
+    }
+
+    /**
+     * @param int|null $shipperId
+     */
+    public function setShipperId($shipperId)
+    {
+        $this->shipperId = $shipperId;
+    }
+
+    /**
+     * @param null|string $shipperName
+     */
+    public function setShipperName($shipperName)
+    {
+        $this->shipperName = $shipperName;
+    }
+
+    /**
+     * @param bool|null $unspecifiedDeliveryInterval
+     */
+    public function setUnspecifiedDeliveryInterval($unspecifiedDeliveryInterval)
+    {
+        $this->unspecifiedDeliveryInterval = $unspecifiedDeliveryInterval;
+    }
+
+    /**
+     * @param bool|null $workInHoliday
+     */
+    public function setWorkInHoliday($workInHoliday)
+    {
+        $this->workInHoliday = $workInHoliday;
+    }
+
+    /**
+     * @param array $mappingClasses
+     */
+    public function setMappingClasses(array $mappingClasses)
+    {
+        $this->mappingClasses = $mappingClasses;
+    }
+
+    /**
+     * @param array $propNameMap
+     */
+    public function setPropNameMap(array $propNameMap)
+    {
+        $this->propNameMap = $propNameMap;
+    }
+
+    /**
+     * @param int|null $deliveryServiceId
+     */
+    public function setDeliveryServiceId($deliveryServiceId)
+    {
+        $this->deliveryServiceId = $deliveryServiceId;
+    }
+
+    /**
+     * @param null|string $orderBefore
+     */
+    public function setOrderBefore($orderBefore)
+    {
+        $this->orderBefore = $orderBefore;
+    }
+
+    /**
+     * @param float|null $priceFreePickup
+     */
+    public function setPriceFreePickup($priceFreePickup)
+    {
+        $this->priceFreePickup = $priceFreePickup;
+    }
 }

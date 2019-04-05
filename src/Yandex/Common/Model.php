@@ -115,7 +115,7 @@ abstract class Model
      */
     public function toJson()
     {
-        return json_encode($this->toArrayRecursive($this));
+        return json_encode($this->toArrayRecursive($this), JSON_UNESCAPED_UNICODE);
     }
 
     /**

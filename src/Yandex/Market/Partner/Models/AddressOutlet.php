@@ -104,4 +104,68 @@ class AddressOutlet extends Model
     {
         $this->regionId = $regionId;
     }
+
+    /**
+     * @param null $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @param null $street
+     */
+    public function setStreet($street)
+    {
+        $this->street = $street;
+    }
+
+    /**
+     * @param null $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
+
+    /**
+     * @param null $building
+     */
+    public function setBuilding($building)
+    {
+        $this->building = $building;
+    }
+
+    /**
+     * @param null $estate
+     */
+    public function setEstate($estate)
+    {
+        $this->estate = $estate;
+    }
+
+    /**
+     * @param null $block
+     */
+    public function setBlock($block)
+    {
+        $this->block = $block;
+    }
+
+    /**
+     * @param null $additional
+     */
+    public function setAdditional($additional)
+    {
+        $this->additional = $additional;
+    }
+
+    /**
+     * @param null $km
+     */
+    public function setKm($km)
+    {
+        $this->km = $km;
+    }
 }
